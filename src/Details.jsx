@@ -2,8 +2,12 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import fetchPet from "./fetchPet";
 import Carousel from "./Carousel";
+import ErrorBoundary from "./ErrorBoundary";
+import { useState } from "react";
+import Modal from "./Modal";
 
 const Details = () => {
+  const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
   const results = useQuery(["details", id], fetchPet);
 
@@ -24,12 +28,32 @@ const Details = () => {
         <h2>{pet.name}</h2>
         <h3>
           {pet.animal} -{pet.breed} - {pet.city}, {pet.state}
-          <button>Adopt {pet.name}</button>
+          <button onClick={() => setShowModal(true)}>Adopt {pet.name}</button>
           <p>{pet.description}</p>
+          {showModal ? (
+            <Modal>
+              <div>
+                <h2>Would you like to adpot {pet.name}?</h2>
+                <div className="buttons">
+                  <button>Yes</button>
+                  <button onClick={() => setShowModal(false)}>No</button>
+                </div>
+              </div>
+            </Modal>
+          ) : null}
         </h3>
       </div>
     </div>
   );
 };
 
-export default Details;
+function DetailsErrorBoundary(props) {
+  return (
+    <ErrorBoundary>
+      <Details {...props} />
+    </ErrorBoundary>
+  );
+}
+
+//export default Details;
+export default DetailsErrorBoundary;

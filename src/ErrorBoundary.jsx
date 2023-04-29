@@ -6,4 +6,21 @@ class ErrorBoundary extends Component {
   static getDerivedStateFromError() {
     return { hasError: true };
   }
+
+  componentDidCatch(error, info) {
+    console.error(error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <h2>
+          There was an error. <Link to="/">Go Back!</Link>
+        </h2>
+      );
+    }
+    return this.props.children;
+  }
 }
+
+export default ErrorBoundary;

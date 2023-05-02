@@ -3,7 +3,7 @@ import Pet from "./Pet";
 
 const Results = ({ pets }) => {
   return (
-    <div className="search">
+    <div className="sm:gird-cols-2 grid grid-cols-1 gap-4 lg:grid-cols-3">
       {!pets.length ? (
         <h2>No Pets Found</h2>
       ) : (

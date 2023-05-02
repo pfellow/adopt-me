@@ -35,12 +35,16 @@ const SearchParams = () => {
   };
 
   return (
-    <div className="search-params">
-      <form action="" onSubmit={submitHandler}>
+    <div className="mx-auto my-0 w-11/12">
+      <form
+        className="mb-10 flex flex-col items-center justify-center rounded-lg bg-gray-200 p-10 shadow-lg"
+        onSubmit={submitHandler}
+      >
         <label htmlFor="location">
           Location
           <input
             id="location"
+            className="search-input"
             name="location"
             placeholder="location"
             type="text"
@@ -48,7 +52,12 @@ const SearchParams = () => {
         </label>
         <label htmlFor="animal">
           Animal
-          <select id="animal" value={animal} onChange={animalChangeHandler}>
+          <select
+            id="animal"
+            value={animal}
+            onChange={animalChangeHandler}
+            className="search-input"
+          >
             <option />
             {ANIMALS.map((animal) => (
               <option key={animal} value={animal}>
@@ -59,7 +68,12 @@ const SearchParams = () => {
         </label>
         <label htmlFor="breed">
           Breed
-          <select id="breed" name="breed" disabled={breeds.length === 0}>
+          <select
+            id="breed"
+            name="breed"
+            disabled={breeds.length === 0}
+            className="search-input rayed-out-disabled"
+          >
             <option />
             {breeds.map((breed) => (
               <option key={breed} value={breed}>
@@ -68,7 +82,12 @@ const SearchParams = () => {
             ))}
           </select>
         </label>
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          className="color rounded border-none bg-orange-500 px-6 py-2 text-white hover:opacity-50"
+        >
+          Submit
+        </button>
       </form>
       <Results pets={pets} />
     </div>
